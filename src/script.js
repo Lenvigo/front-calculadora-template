@@ -74,14 +74,17 @@ async function getApiResult() {
         const data = await response.json();
 
         // Mostrar el resultado de la API en el div correspondiente
-        document.getElementById("api-result-display").innerText = `Resultado de la API: ${parseFloat(data.resultado).toFixed(3)}`;
+        document.getElementById("api-result-display").innerText = ` ${parseFloat(data.resultado).toFixed(3)}`;
     } catch (error) {
         // Si ocurre un error en la conexión o en la respuesta, mostramos un mensaje en la modal
         let errorMessage = error.message;
 
         // Si el error es de conexión, se muestra un mensaje diferente
         if (error.message.includes("Failed to fetch")) {
-            errorMessage = "Error en la conexión a la API. Verifica la conexión o el servidor.";
+            errorMessage = "Hemos perdido el rastro.";
+        }
+        if (error.message.includes("Error en la solicitud")) {
+            errorMessage = "Aquí no hay ningún backed, por favor no molestes mas! Pregunta en otra dirección.";
         }
 
         // Coloca el mensaje de error en la modal
